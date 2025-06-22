@@ -20,14 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
-      const response = await fetch('/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(formData))
-      });
-      
-      if (response.ok) window.location.href = '/login.html';
-      else alert('Registration failed');
+      const data = Object.fromEntries(formData);
+
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(formData))
+        });
+
+        if (response.ok) {
+          window.location.href = '/login.html';
+        } else {
+          const errorText = await response.text();
+          alert(`Registration failed: ${errorText}`);
+        }
+      } catch (err) {
+        alert('Network error: '+err.message);
+      }
     });
   }
 

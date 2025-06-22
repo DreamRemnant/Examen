@@ -7,7 +7,21 @@
 <body>
   <h1>Send Email</h1>
   <div id="userList"></div>
-  
+  <script>
+    fetch('/users')
+      .then(res => res.json())
+      .then(users => {
+        let html = '<ul>';
+        users.forEach(user => {
+          const fullEmail = `${user.email_prefix}@dreamtcg.com`;
+          html += `<li>
+            <input type="checkbox" value="${fullEmail}">
+            ${user.full_name} (${fullEmail})
+          </li>`;
+        });
+        document.getElementById('userList').innerHTML = html;
+      });
+  </script>
   <h2>Compose Email</h2>
   <form id="mailForm">
     <label>Recipients (comma separated):</label>
