@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Users</title>
+  <script src="scripts.js"></script>
+</head>
+<body>
+  <h1>Send Email</h1>
+  <div id="userList"></div>
+  
+  <h2>Compose Email</h2>
+  <form id="mailForm">
+    <label>Recipients (comma separated):</label>
+    <input type="text" id="recipients" name="recipients" required>
+    
+    <label>Subject:</label>
+    <input type="text" id="subject" name="subject" required>
+    
+    <label>Message:</label>
+    <textarea id="body" name="body" required></textarea>
+    
+    <button type="submit">Send Email</button>
+  </form>
+</body>
+</html>
