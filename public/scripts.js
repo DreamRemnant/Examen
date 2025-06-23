@@ -48,9 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(users => {
         let html = '<h2>Users</h2><ul>';
         users.forEach(user => {
+          const fullEmail = `${user.email_prefix}@dreamtcg.com`;
           html += `<li>
-            <input type="checkbox" value="${user.email}">
-            ${user.username} (${user.email})
+            <input type="checkbox" value="${fullEmail}" />
+            ${user.full_name} (${fullEmail})
           </li>`;
         });
         html += '</ul><button id="addRecipients">Add to Recipients</button>';
@@ -60,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const recipients = document.getElementById('recipients');
           const selected = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
             .map(el => el.value);
-          
           recipients.value = [
             ...new Set([...recipients.value.split(','), ...selected])
           ].filter(e => e).join(',');
